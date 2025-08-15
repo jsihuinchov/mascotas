@@ -2,6 +2,14 @@
 
 <link rel="stylesheet" href="~/css/styles.css" />
 
+<!-- Introducción -->
+<section id="intro">
+    <h1>Guía Completa de Razas de Perros</h1>
+    <p>Bienvenido a nuestra guía completa de razas de perros. Aquí podrás explorar más de 100 razas diferentes, filtrar por letra inicial y conocer sus características principales como peso, tamaño y esperanza de vida.</p>
+    <p>Usa el filtro de categorías para encontrar rápidamente la raza que buscas y navega entre las páginas para descubrir más.</p>
+</section>
+
+<!-- Filtro de categorías -->
 <select id="category-filter">
     <option value="">Todas</option>
     <option value="A">A</option>
@@ -10,12 +18,12 @@
     <!-- ... hasta Z -->
 </select>
 
-
+<!-- Listado de perros -->
 <div id="dogs-container">
     @foreach (var dog in Model)
     {
         <div class="dog-item" data-category="@dog.Category">
-            <h3>@dog.Name</h3>
+            <h3>@(string.IsNullOrEmpty(dog.Name) ? "Nombre desconocido" : dog.Name)</h3>
             <p><strong>Peso:</strong> @dog.Weight</p>
             <p><strong>Tamaño:</strong> @dog.Size</p>
             <p><strong>Esperanza de vida:</strong> @dog.Lifespan años</p>
@@ -23,6 +31,8 @@
     }
 </div>
 
+<!-- Paginación -->
 <div id="pagination"></div>
 
 <script src="~/js/pagination.js"></script>
+

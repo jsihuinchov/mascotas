@@ -1,36 +1,51 @@
-/* Contenedor de la lista */
-#dog-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+#intro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+#intro h1 {
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+#intro p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Contenedor principal de tarjetas */
+#dogs-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas fijas */
+    grid-auto-rows: auto; /* filas automáticas según contenido */
+    gap: 20px; /* espacio entre tarjetas */
     margin-top: 20px;
 }
 
-/* Cada tarjeta de perro */
+/* Tarjetas individuales */
 .dog-item {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
     padding: 15px;
-    width: 220px;
-    box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Efecto hover en cada tarjeta */
+/* Hover */
 .dog-item:hover {
     transform: translateY(-5px);
     box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Títulos de los perros */
+/* Títulos y textos */
 .dog-item h3 {
     margin-top: 0;
     font-size: 18px;
     color: #333;
 }
 
-/* Párrafos de información */
 .dog-item p {
     margin: 5px 0;
     font-size: 14px;
@@ -43,4 +58,25 @@
     font-size: 14px;
     border-radius: 5px;
     border: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* Paginación */
+#pagination {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.page-btn {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
 }

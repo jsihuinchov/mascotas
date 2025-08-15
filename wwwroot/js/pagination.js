@@ -1,39 +1,46 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const itemsPerPage = 10;
-    const container = document.getElementById("dogs-container");
-    const dogs = Array.from(container.getElementsByClassName("dog-item"));
-    const pagination = document.getElementById("pagination");
+const filterSelect = document.getElementById('category-filter');
+const dogList = document.getElementById('dogs-container');
+const dogs = Array.from(dogList.getElementsByClassName('dog-item'));
+const pagination = document.getElementById('pagination');
 
-    let currentPage = 1;
+const itemsPerPage = 12;
+let currentPage = 1;
+let filteredDogs = dogs;
 
-    function renderPage(page) {
-        dogs.forEach((dog, index) => {
-            dog.style.display = (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage)
-                ? "block" : "none";
+// Filtrado por categoría
+filterSelect.addEventListener('change', () => {
+    const category = filterSelect.value;
+    filteredDogs = dogs.filter(dog => category === "" || dog.dataset.category === category);
+    currentPage = 1;
+    renderPage();
+});
+
+// Función de renderizado de páginas
+function renderPage() {
+    dogs.forEach(dog => dog.style.display = "none"); // Oculta todo
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    filteredDogs.slice(start, end).forEach(dog => dog.style.display = "block");
+
+    renderPaginationButtons();
+}
+
+// Botones de paginación
+function renderPaginationButtons() {
+    pagination.innerHTML = "";
+    const pageCount = Math.ceil(filteredDogs.length / itemsPerPage);
+    for (let i = 1; i <= pageCount; i++) {
+        const btn = document.createElement('button');
+        btn.innerText = i;
+        btn.className = "page-btn";
+        if (i === currentPage) btn.classList.add('active');
+        btn.addEventListener('click', () => {
+            currentPage = i;
+            renderPage();
         });
+        pagination.appendChild(btn);
     }
+}
 
-    function setupPagination() {
-        const totalPages = Math.ceil(dogs.length / itemsPerPage);
-        pagination.innerHTML = "";
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement("button");
-            btn.textContent = i;
-            btn.addEventListener("click", () => {
-                currentPage = i;
-                renderPage(currentPage);
-            });
-            pagination.appendChild(btn);
-        }
-    }
-
-    setupPagination();
-    renderPage(currentPage);
-});
-
-document.getElementById("category-filter").addEventListener("change", (e) => {
-    const selected = e.target.value;
-    dogs.forEach(dog => {
-        dog.style.display = (selected === "" || dog.dataset.category === selected) ? "block" : "none";
-    });
-});
+// Inicializa la primera página
+renderPage();
