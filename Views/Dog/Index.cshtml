@@ -1,0 +1,19 @@
+@model List<mascotas.Models.Dog>
+
+<link rel="stylesheet" href="~/css/styles.css" />
+
+<div id="dogs-container">
+    @foreach (var dog in Model)
+    {
+        <div class="dog-item" data-category="@dog.Category">
+            <h3>@dog.Name</h3>
+            <p><strong>Peso:</strong> @dog.Weight</p>
+            <p><strong>Tamaño:</strong> @dog.Size</p>
+            <p><strong>Esperanza de vida:</strong> @dog.Lifespan años</p>
+        </div>
+    }
+</div>
+
+<div id="pagination"></div>
+
+<script src="~/js/pagination.js"></script>
