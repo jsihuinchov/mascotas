@@ -2,6 +2,15 @@
 
 <link rel="stylesheet" href="~/css/styles.css" />
 
+<select id="category-filter">
+    <option value="">Todas</option>
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <!-- ... hasta Z -->
+</select>
+
+
 <div id="dogs-container">
     @foreach (var dog in Model)
     {
