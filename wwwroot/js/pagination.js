@@ -30,3 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setupPagination();
     renderPage(currentPage);
 });
+
+document.getElementById("category-filter").addEventListener("change", (e) => {
+    const selected = e.target.value;
+    dogs.forEach(dog => {
+        dog.style.display = (selected === "" || dog.dataset.category === selected) ? "block" : "none";
+    });
+});
